@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
@@ -27,6 +26,11 @@ namespace Frontend.Controllers
 			return View();
 		}
 
+		public IActionResult About()
+		{
+			return View();
+		}
+
 		[HttpGet("Report/{*pathInfo}")]
 		public async Task<ActionResult> Report(string pathInfo)
 		{
@@ -40,11 +44,6 @@ namespace Frontend.Controllers
 				Method = HttpMethod.Post
 			};
 			request.Content = jsonBody;
-			if (this.Request.Headers.ContainsKey("azds-route-as"))
-			{
-				// Propagate the dev space routing header
-				request.Headers.Add("azds-route-as", this.Request.Headers["azds-route-as"] as IEnumerable<string>);
-			}
 			HttpResponseMessage response = await client.SendAsync(request);
 			response.EnsureSuccessStatusCode();
 			Stream stream = await response.Content.ReadAsStreamAsync();

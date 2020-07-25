@@ -1,18 +1,13 @@
 {
+  "version": "2.0.0",
   "tasks": [
     {
-      "label": "azds: prelaunch",
-      "command": "azds",
-      "args": [
-        "up",
-        "--port=51801:9229",
-        "--await-exec",
-        "--keep-alive"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": []
+      "label": "local-process-with-kubernetes.service",
+      "type": "local-process-with-kubernetes.service",
+      "service": "middletier",
+      "ports": [
+        3000
+      ]
     }
   ]
 }

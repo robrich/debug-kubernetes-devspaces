@@ -8,18 +8,10 @@
       },
       "applicationUrl": "http://localhost:4000"
     },
-    "Azure Dev Spaces": {
-      "commandName": "AzureDevSpaces",
-      "launchBrowser": true,
-      "resourceGroup": "kubernetes",
-      "aksName": "robrich",
-      "subscriptionId": "8bbddcd2-8f33-4f30-99c1-5aaa3bd3a038"
-    },
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
-      "environmentVariables": {},
       "httpPort": 55000
     }
   }

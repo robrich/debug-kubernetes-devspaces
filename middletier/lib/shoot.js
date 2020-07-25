@@ -1,25 +1,20 @@
 const puppeteer = require('puppeteer');
 const os = require('os');
 const path = require('path');
-const uuidv4 = require('uuid/v4');
+const { v4: uuidv4 } = require('uuid');
 
 const tmpdir = os.tmpdir();
-
 const env = process.env.NODE_ENV || 'development';
 const config = require(`../config/${env}.json`);
+let backendUrl = config.backendUrl;
 
-async function shoot({url, header}) {
-  const fullUrl = config.backendUrl+url;
-  console.log(`env: ${env}, fullUrl: ${fullUrl}, header: ${header}`);
+async function shoot(url) {
+  const fullUrl = backendUrl+url;
+  console.log(`env: ${env}, fullUrl: ${fullUrl}, BACKEND_SERVICE_HOST: ${process.env.BACKEND_SERVICE_HOST}, BACKEND_SERVICE_PORT: ${process.env.BACKEND_SERVICE_PORT}`);
   const browser = await puppeteer.launch({
-    args: [`--no-sandbox`, `--disable-setuid-sandbox`]
+    args: ['--disable-dev-shm-usage', '--no-sandbox', '--disable-setuid-sandbox']
   });
   const page = await browser.newPage();
-  if (header) {
-    await page.setExtraHTTPHeaders({
-      'azds-route-as': header
-    })
-  }
   await page.goto(fullUrl, {waitUntil: 'networkidle0'});
 
   // FRAGILE: we're poluting the tmp folder and not cleaning it up

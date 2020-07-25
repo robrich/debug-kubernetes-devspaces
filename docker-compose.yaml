@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    depends_on:
+    - middletier
+    ports:
+    - 5000:80
+
+  middletier:
+    build:
+      context: middletier
+      dockerfile: Dockerfile
+    depends_on:
+    - backend
+    ports:
+    - 80
+
+  backend:
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    ports:
+    - 80

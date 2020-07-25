@@ -8,12 +8,12 @@ namespace Backend
 {
 	public class Startup
 	{
+		private readonly IConfiguration configuration;
+
 		public Startup(IConfiguration configuration)
 		{
-			Configuration = configuration;
+			this.configuration = configuration;
 		}
-
-		public IConfiguration Configuration { get; }
 
 		public void ConfigureServices(IServiceCollection services)
 		{

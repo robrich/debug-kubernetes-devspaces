@@ -9,12 +9,11 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const url = req.body.url;
-  const header = req.headers['azds-route-as'];
-  console.log(`post to /, url: ${url}, header: ${header}`);
-  if (!url) {
+  console.log(`post to /, url: ${url}`);
+  if (!url || url[0] !== '/') {
     return res.status(400).end();
   }
-  shoot({url, header}).then(path => {
+  shoot(url).then(path => {
     res.sendFile(path);
   }).catch(err => {
     console.log(err);

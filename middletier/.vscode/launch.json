@@ -1,27 +1,25 @@
 {
   "configurations": [
     {
-      "name": "Launch Server (AZDS)",
       "type": "node",
       "request": "launch",
-      "protocol": "inspector",
-      "preLaunchTask": "azds: prelaunch",
-      "cwd": "${workspaceFolder}",
-      "runtimeExecutable": "azds",
+      "name": "debug with k8s",
+      "runtimeExecutable": "npm",
       "runtimeArgs": [
-        "exec",
-        "--on-exit-resume-up",
-        "--",
-        "node",
-        "--inspect=0.0.0.0:9229",
-        "--inspect-brk",
-        "--nolazy",
-        "app.js"
+        "run",
+        "start"
       ],
-      "address": "127.0.0.1",
-      "port": 51801,
-      "localRoot": "${workspaceFolder}/.",
-      "remoteRoot": "/app"
+      "preLaunchTask": "local-process-with-kubernetes.service"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "npm start",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "start"
+      ]
     }
   ]
 }

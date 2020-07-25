@@ -10,6 +10,11 @@ namespace Backend.Controllers
 			return View();
 		}
 
+		public IActionResult About()
+		{
+			return View();
+		}
+
 		[HttpGet("report")]
 		public IActionResult Report()
 		{

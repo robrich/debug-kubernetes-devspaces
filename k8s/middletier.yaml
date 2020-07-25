@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: middletier
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: middletier
+  template:
+    metadata:
+      labels:
+        app: middletier
+        version: v0.1
+    spec:
+      containers:
+      - name: middletier
+        image: ACRURL/middletier:v0.1
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: middletier
+spec:
+  type: ClusterIP
+  selector:
+    app: middletier
+  ports:
+  - port: 80
+    targetPort: 80
